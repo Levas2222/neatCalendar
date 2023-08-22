@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+		.input:focus {
+            outline-style: none;
+			outline-offset: 0px;
+		}
+	}
