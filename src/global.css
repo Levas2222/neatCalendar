@@ -7,4 +7,10 @@
             outline-style: none;
 			outline-offset: 0px;
 		}
+		.modal-box{
+
+			padding:0px;
+			border-radius:0.5rem;
+
+		}
 	}
