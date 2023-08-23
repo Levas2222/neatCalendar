@@ -1,4 +1,8 @@
 <script lang="ts">
+
+let passwordType:string="password"
+
+
 </script>
 
 <button class="btn-sm btn-base text-orange-400 font-bold p-1" onclick="my_modal_2.showModal()"
@@ -7,16 +11,18 @@
 <dialog id="my_modal_2" class="modal">
 	<form method="dialog" class="modal-box  bg-slate-400">
 		
-		<form action="" class="mx-0 mb-0 mt-0 bg-white space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
-			<p class="text-center text-lg font-medium">Sign Up!</p>
+		<form action="" class="mx-0 mb-0 mt-0 bg-white space-y-4 
+		rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
+			<p class="text-center text-lg font-medium">Create an Account</p>
 
             <div>
-				<label for="Name" class="sr-only">Email</label>
+				<label for="Name" class="sr-only">Name</label>
 
 				<div class="relative">
 					<input
 						type="name"
-						class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+						class="w-full bg-white rounded-lg border border-slate-800
+						 p-4 pe-12 text-sm shadow-sm focus:border-none"
 						placeholder="Enter your name"
 					/>
 
@@ -30,11 +36,12 @@
 				<div class="relative">
 					<input
 						type="email"
-						class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+						class="w-full bg-white rounded-lg border border-slate-800 p-4
+						pe-12 text-sm shadow-sm focus:border-none"
 						placeholder="Enter email"
 					/>
 
-					<span class="absolute inset-y-0 end-0 grid place-content-center px-4">
+					<span class="absolute inset-y-0 end-0 grid place-content-center px-4" >
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
 							class="h-4 w-4 text-gray-400"
@@ -59,7 +66,8 @@
 				<div class="relative">
 					<input
 						type="password"
-						class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+						class="w-full bg-white rounded-lg border border-slate-800 p-4
+						pe-12 text-sm shadow-sm focus:border-none"
 						placeholder="Enter password"
 					/>
 
@@ -88,11 +96,14 @@
 				</div>
 			</div>
 
+			
+
 			<button
 				type="submit"
-				class="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
+				class="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm
+				font-medium text-white  border border-indigo-900 hover:bg-indigo-800"
 			>
-				Sign in
+				Sign Up
 			</button>
 		</form>
 	</form>

@@ -1,13 +1,21 @@
 <script lang="ts">
 
+let selected:Number;
+function handleSelect(){
+
+	selected=0;
+
+}
+
+
 
 </script>
 
 
-<div class="navbar bg-secondary">
+<div class="navbar bg-textgray border-textgray">
 	<div class="navbar-start">
 		<div class="dropdown">
-			<label tabindex="0" class="btn btn-ghost btn-circle">
+			<label tabindex="0" class="btn btn-ghost btn-circle ">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-5 w-5"
@@ -23,7 +31,7 @@
 					/>
 				</svg>
 			</label>
-			<ul class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-primary rounded-box w-52">
+			<ul class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-primarylight rounded-box w-52">
 				<li><a href="/profilepage">Profile</a></li>
 				<li><a href="/loginscreen">Sign Out</a></li>
 			</ul>
@@ -33,16 +41,18 @@
 		<div class="join">
 			<div>
 				<div>
-					<input class="input input-bordered join-item" placeholder="Search" />
+					<input class="input input-bordered rounded-full join-item" placeholder="Search" />
 				</div>
 			</div>
-			<select class="select join-item">
-				<option disabled selected>Tags</option>
-				<option>Tag 1</option>
-				<option>Tag 2</option>
-				<option />
+			<select on:change={handleSelect} bind:value={selected}  class="select select-bordered join-item" >
+				
+				<option disabled selected hidden  value="0">Tags</option>
+				<option value="1" on:click={handleSelect}>None</option>
+				<option value="2">One</option>
+				<option value="3">Two</option>
+				
 			</select>
-			<button class="btn btn-circle join-item">
+			<button class="btn border-textgray btn-circle join-item rounded-full">
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					class="h-5 w-5"

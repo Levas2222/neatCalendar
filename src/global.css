@@ -7,6 +7,10 @@
             outline-style: none;
 			outline-offset: 0px;
 		}
+		.select:focus {
+            outline-style: none;
+			outline-offset: 0px;
+		}
 		.modal-box{
 
 			padding:0px;

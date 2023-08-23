@@ -2,14 +2,23 @@
 	import ModalBox from './modalBox.svelte';
 </script>
 
-<div class="mx-auto w-full h-screen bg-white px-4 py-16 sm:px-6 lg:px-8">
+<div class="mx-auto w-full h-screen bg-primarylight px-4 py-16 sm:px-6 lg:px-8">
 	<div class="mx-auto max-w-lg">
-		<img class="" src="neatCalendar\static\logo-no-background.svg" alt="">
-		<p class="mx-auto mt-4 max-w-md text-center text-gray-500">
-			Get started with NeatCalendar and Create with ease customizable repetable time events.
+		
+
+
+
+
+
+
+
+
+		<p class="mx-auto mt-4 max-w-md text-center select-none text-textgray">
+			Get started with NeatCalendar and create  customizable repetable time events with ease.
 		</p>
 
-		<form action="" class="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
+		<form action="" class="mb-0 mt-6 space-y-4 rounded-lg p-4 
+			shadow-lg sm:p-6 lg:p-8 text-textgray select-none">
 			<p class="text-center text-lg font-medium">Sign in to your account</p>
 
 			<div>
@@ -18,7 +27,8 @@
 				<div class="relative">
 					<input
 						type="email"
-						class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+						class="w-full bg-white rounded-lg border border-slate-800 p-4
+						pe-12 text-sm shadow-sm focus:border-none"
 						placeholder="Enter email"
 					/>
 
@@ -47,7 +57,8 @@
 				<div class="relative">
 					<input
 						type="password"
-						class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-sm"
+						class="w-full bg-white rounded-lg border border-slate-800 p-4
+						pe-12 text-sm shadow-sm focus:border-none"
 						placeholder="Enter password"
 					/>
 
@@ -78,7 +89,8 @@
 
 			<button
 				type="submit"
-				class="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white"
+				class="block w-full rounded-lg bg-indigo-600 px-5 py-3 text-sm
+				 font-medium text-white  border border-indigo-900 hover:bg-indigo-800"
 			>
 				Sign in
 			</button>

@@ -6,8 +6,8 @@
 	}
 </script>
 
-<div class="btm-nav">
-	<button class="text-quinary active on:click={toggleSelect}">
+<div class="btm-nav bg-whitish border">
+	<button class="text-quinary  on:click={toggleSelect}">
         <svg
         xmlns="http://www.w3.org/2000/svg"
         class="h-5 w-5"
@@ -27,7 +27,7 @@
     </svg>
         
 	</button>
-	<button class="text-quinary active">
+	<button class="text-quinary ">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			class="h-5 w-5"
@@ -42,7 +42,7 @@
 			/></svg
 		>
 	</button>
-	<button class="text-quinary active">
+	<button class="text-quinary ">
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			class="h-5 w-5"

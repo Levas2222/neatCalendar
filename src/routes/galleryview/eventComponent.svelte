@@ -3,7 +3,7 @@
 	const tags: string[] = ['Football', 'Sports'];
 </script>
 
-<div class="block bg-tertiary border p-4 mb-4 shadow-md rounded-lg">
+<div class="block bg-blueish border p-4 mb-4 shadow-md rounded-lg hover:bg-base-200">
 	<span class="inline-block">
 		<span class="text mt-2 mx-1 text-textwhite font-semibold">{name}</span>
 		{#each tags as tag}
