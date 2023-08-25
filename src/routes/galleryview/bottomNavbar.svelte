@@ -1,4 +1,8 @@
 <script lang="ts">
+
+	import {goto} from '$app/navigation';
+
+
 	let isSelectPressed = false;
 	function toggleSelect() {
 		isSelectPressed = !isSelectPressed;
@@ -6,7 +10,8 @@
 	}
 </script>
 
-<div class="btm-nav bg-whitish border">
+<div class="btm-nav bg-secondarydark 
+			border-t-2 border-cyanish">
 	<button class="text-quinary  on:click={toggleSelect}">
         <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +47,7 @@
 			/></svg
 		>
 	</button>
-	<button class="text-quinary ">
+	<button class="text-quinary " on:click={()=>goto('/componentsview')}>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			class="h-5 w-5"

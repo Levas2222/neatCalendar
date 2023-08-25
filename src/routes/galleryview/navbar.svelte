@@ -12,7 +12,7 @@ function handleSelect(){
 </script>
 
 
-<div class="navbar bg-textgray border-textgray">
+<div class="navbar bg-secondarydark border-secondarydark">
 	<div class="navbar-start">
 		<div class="dropdown">
 			<label tabindex="0" class="btn btn-ghost btn-circle ">
