@@ -11,7 +11,7 @@ let passwordType:string="password"
 <dialog id="my_modal_2" class="modal">
 	<form method="dialog" class="modal-box  bg-slate-400">
 		
-		<form action="" class="mx-0 mb-0 mt-0 bg-white space-y-4 
+		<form action="" class="mx-0 mb-0 mt-0 bg-white text-textgray space-y-4 
 		rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
 			<p class="text-center text-lg font-medium">Create an Account</p>
 
