@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	let allValues='';
+	let allValues = '';
 	let inputValue = '';
 	let highlightedIndex = -1;
 
@@ -10,7 +10,7 @@
 		'Apple',
 		'Applebee',
 		'Banana',
-		
+
 		'Cherry',
 		'Date',
 		'Fig',
@@ -23,104 +23,99 @@
 		'Pineapple'
 	];
 
-	let specificTags:string[]=[];
+	let specificTags: string[] = [];
 
 	let filteredOptions = options;
 
-	let errorflag:string;
+	let errorflag: string;
 
-	function handleCommaSeparation(allValues:string){
-
-
+	function handleCommaSeparation(allValues: string) {
 		const lastIndex = allValues.lastIndexOf(',');
-		let taglist:string[]=[];
-		
+		let taglist: string[] = [];
+
 		if (lastIndex === -1) {
-			
-    		inputValue=allValues;
-			return [taglist,inputValue]
+			inputValue = allValues;
+			return [taglist, inputValue];
+		} else {
+			taglist = allValues.slice(0, lastIndex).split(',');
+			inputValue = allValues.slice(lastIndex + 1);
 
-  		} else {
-    
-    		taglist=allValues.slice(0, lastIndex).split(',');
-    		inputValue = allValues.slice(lastIndex + 1);
-	
-			return [taglist,inputValue]
+			return [taglist, inputValue];
 		}
-
-
-
+	}
+	function addSpaceAfterCommas(inputString: string): string {
+		const charArray = inputString.split('');
+		for (let i = 0; i < charArray.length; i++) { 
+			if (charArray[i] === ',' && (i != charArray.length - 1 && charArray[i + 1] !== ' ')) {
+				charArray.splice(i + 1, 0, ' ');
+			}
+		}
+		return charArray.join('');
 	}
 
-
-	function handleInputClick(event){
-
-		[specificTags,inputValue]=handleCommaSeparation(allValues);
+	function handleInputClick() {
+		[specificTags, inputValue] = handleCommaSeparation(allValues);
 
 		//illegal inputs
-		const regex =/create\s?(,|\s)/i;
+		const regex = /create\s?(,|\s)/i;
 		const match = regex.exec(allValues.toLowerCase());
 
-		const startregex =/^,/;
+		const startregex = /^,/;
 		const startmatch = startregex.exec(allValues.toLowerCase());
 
-		const lengthmatch =(inputValue.length > 20);
+		const lengthmatch = inputValue.length > 20;
 
 		if (match || startmatch) {
-			
-			inputElement.readOnly=true;
+			inputElement.readOnly = true;
 		}
 
 		if (lengthmatch) {
-			
-			inputElement.readOnly=true;
-			
+			inputElement.readOnly = true;
 		}
 
-
-
+		//Modification to Input Line
+		allValues=addSpaceAfterCommas(allValues);
 
 		//Modification to Options
-		filteredOptions=options.filter((option) => option.toLowerCase().startsWith(inputValue.trim().toLowerCase()));
-		if (inputValue.trim()!="" && inputValue.trim().toLowerCase() !="create" && inputValue.trim() != filteredOptions[0]) {
-			filteredOptions.unshift("Create "+ inputValue.trim())
-
+		filteredOptions = options.filter((option) =>
+			option.toLowerCase().startsWith(inputValue.trim().toLowerCase())
+		);
+		if (
+			inputValue.trim() != '' &&
+			inputValue.trim().toLowerCase() != 'create' &&
+			inputValue.trim() != filteredOptions[0]
+		) {
+			filteredOptions.unshift('Create ' + inputValue.trim());
 		}
 
 		//Instruction to Options Container
-		if(filteredOptions.length===0 || inputValue===""){
-
+		if (filteredOptions.length === 0 || inputValue === '') {
 			handleInputBlur();
-
-		}else{
-
+		} else {
 			handleInputFocus();
 			positionOptions();
-
 		}
-		
-		
-
 	}
 
 	/* Auto Complete Tags and handle text*/
 
 	function completeInputText(option: string) {
-
 		const regex = /^\s*Create(.*)\s*$/;
 		const match = regex.exec(option);
 		if (match && match[1]) {
-			inputValue = match[1]+",";
-		}else{
-			inputValue = option+",";
-
+			inputValue = ', ';
+		} else {
+			inputValue = option + ', ';
 		}
-		
-		
-		
-		inputElement.focus();
+
+		allValues = allValues.replace(inputValue, '');
+		inputValue = '';
+		allValues = allValues + option + ', ';
+
 		
 
+		handleInputClick();
+		inputElement.focus();
 	}
 
 	/* Handle Navigation Around*/
@@ -146,22 +141,22 @@
 		});
 	});
 
-	function handleKeyPress(event:KeyboardEvent) {
-
-
-		if (event.key === 'Tab' || event.key === 'Enter') {
+	function handleKeyPress(event: KeyboardEvent) {
+		if (event.key === 'Enter') {
+			event.preventDefault();
+			completeInputText(filteredOptions[0]);
+			
+		} else if (event.key === 'Tab' ){
 			if (inputElement.value != '') {
 				event.preventDefault();
-				completeInputText(filteredOptions[0]);
+				completeInputText(filteredOptions[1]);
 			}
+			
 		} else if (event.key === 'Escape') {
 			handleInputBlur();
 			inputElement.blur();
-
-		} else if (event.key === 'Backspace' || event.key === 'Delete' ) {
-			
-			inputElement.readOnly=false;
-
+		} else if (event.key === 'Backspace' || event.key === 'Delete') {
+			inputElement.readOnly = false;
 		}
 	}
 
@@ -170,34 +165,23 @@
 	let textWidth = 0;
 
 	function positionOptions() {
-
 		const canvas = document.createElement('canvas');
-    	const context = canvas.getContext('2d');
+		const context = canvas.getContext('2d');
 		context.font = ' 14px Calibri';
 		textWidth = context.measureText(allValues).width;
-		
-		optionsPosition=textWidth;
-		optionsPosition= Math.max(20, Math.min(optionsPosition, 480))
 
-		
+		optionsPosition = textWidth;
+		optionsPosition = Math.max(20, Math.min(optionsPosition, 480));
 	}
-	
-
-
 </script>
 
 <div id="container" class="relative">
-	<p>
-		INPUT:
-		{errorflag}
-		
-	</p>	
-	
+
 	<input
 		id="Tags"
 		type="tags"
 		class="w-full bg-white rounded-lg border border-slate-800 p-4
-      			pe-12 text-sm  font-calibri shadow-sm focus:border-none"
+      			pe-12 text-sm font-calibri shadow-sm focus:border-none"
 		placeholder="Tags"
 		bind:value={allValues}
 		bind:this={inputElement}
@@ -219,6 +203,7 @@
 					on:click={() => {
 						completeInputText(option);
 					}}
+			
 				>
 					{option}
 				</div>

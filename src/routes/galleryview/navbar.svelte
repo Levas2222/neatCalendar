@@ -1,12 +1,11 @@
 <script lang="ts">
 
-let selected:Number;
+let selected=0;
 function handleSelect(){
 
 	selected=0;
 
 }
-
 
 
 </script>
@@ -44,9 +43,9 @@ function handleSelect(){
 					<input class="input input-bordered rounded-full join-item" placeholder="Search" />
 				</div>
 			</div>
-			<select on:change={handleSelect} bind:value={selected}  class="select select-bordered join-item" >
+			<select bind:value={selected}  class="select select-bordered join-item" >
 				
-				<option disabled selected hidden  value="0">Tags</option>
+				<option disabled value="0">Tags</option>
 				<option value="1" on:click={handleSelect}>None</option>
 				<option value="2">One</option>
 				<option value="3">Two</option>
