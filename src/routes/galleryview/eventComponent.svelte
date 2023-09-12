@@ -1,6 +1,10 @@
 <script lang="ts">
+	
 	const name: string = 'Man Utd vs Totenham 0-2';
 	const tags: string[] = ['Football', 'Sports'];
+
+
+
 </script>
 
 <div class="block bg-blueish border p-4 mb-4 shadow-md rounded-lg hover:bg-base-200">

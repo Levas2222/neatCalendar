@@ -1,13 +1,14 @@
 <script >
     export let duedateerror;
-	let initDateError = duedateerror[0];
-	let initDateErrorFlag = duedateerror[1];
+	let dueDateError = duedateerror[0];
+	let dueDateErrorFlag = duedateerror[1];
     let inputa="2023-10-12";
 </script>
 
 
 <div class="flex justify-center mx-4 my-4">
 	<span class="mx-1 mt-2">Due Date (Optional)</span>
+    <div class="flex flex-col">
 	<input
         id=dateinput
 		type="date"
@@ -21,7 +22,8 @@
 
 	/>
 
-    {#if initDateError}
-    <span class="label-text-alt mx-2 text-redish font-bold select-none">{initDateErrorFlag}</span>
+    {#if dueDateError}
+    <span class="label-text-alt mx-4 px-2 text-redish font-bold select-none">{dueDateErrorFlag}</span>
     {/if}
+    </div>
 </div>

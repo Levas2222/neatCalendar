@@ -14,34 +14,53 @@
 		'Friday',
 		'Saturday',
 		'Sunday',
-		'Weekday',
-		'Mango',
-		'Orange',
-		'Peach',
-		'Pear',
-		'Pineapple'
+		'Weekday'
 	];
 
 	let specificTags: string[] = [];
 
 	let filteredOptions = options;
 
-	let errorflag: string;
+	let timeTagError:boolean=false;
+	let timeTagErrorFlag: string;
 
-	function handleCommaSeparation(allValues: string) {
-		const lastIndex = allValues.lastIndexOf(',');
-		let taglist: string[] = [];
-
+	function commaSeparation(allValues:string):[string[],string, string] {
+		 
+		let taglist:string[]=[];
+		const lastIndex:number = allValues.lastIndexOf(',');
+		
+		//commaSeperation
 		if (lastIndex === -1) {
 			inputValue = allValues;
-			return [taglist, inputValue];
-		} else {
-			taglist = allValues.slice(0, lastIndex).split(',');
-			inputValue = allValues.slice(lastIndex + 1);
 
-			return [taglist, inputValue];
+		} else {
+			
+			const tags:string | string[]  = allValues.slice(0, lastIndex).split(',').map(item => item.trim());
+			if (typeof tags ==="string"){
+				taglist=[tags];
+				
+			}
+			else{
+				taglist = tags as string[];
+			}
+			
+			inputValue = allValues.slice(lastIndex + 1);
+			
 		}
+		taglist =taglist as string[];
+		let tagset=[...new Set(taglist)];
+		
+
+		return [taglist,inputValue,allValues]
 	}
+
+	function removeDupplicates(taglist:string){
+		
+	
+	}
+
+
+
 	function addSpaceAfterCommas(inputString: string): string {
 		const charArray = inputString.split('');
 		for (let i = 0; i < charArray.length; i++) {
@@ -53,7 +72,9 @@
 	}
 
 	function handleInputClick() {
-		[specificTags, inputValue] = handleCommaSeparation(allValues);
+		//Understanding Input
+		[specificTags,inputValue,allValues]=commaSeparation(allValues);
+		
 
 		//illegal inputs
 		const startregex = /^,/;
@@ -61,20 +82,22 @@
 
 		const lengthmatch = inputValue.length > 20;
 
-		if (startmatch) {
-			inputElement.readOnly = true;
-		}
-
 		if (lengthmatch) {
 			inputElement.readOnly = true;
+			timeTagErrorFlag="The tag name is too long";
+			timeTagError=true;
+		}
+		else{
+			timeTagError=false;
 		}
 
 		//Modification to Input Line
-		allValues = addSpaceAfterCommas(allValues);
 
 		//Modification to Options
-		filteredOptions = options.filter((option) =>
-			option.toLowerCase().startsWith(inputValue.trim().toLowerCase())
+		filteredOptions = options.filter(
+			(option) =>
+				option.toLowerCase().startsWith(inputValue.trim().toLowerCase()) &&
+				!specificTags.includes(option)
 		);
 
 		//Instruction to Options Container
@@ -99,15 +122,20 @@
 
 	/* Handle Navigation Around*/
 
-	let isTimeInputFocused = false;
+	let optionsContrainerFocus = false;
 	let inputElement: HTMLInputElement;
 
 	function handleInputFocus() {
-		isTimeInputFocused = true;
+		if (inputElement.selectionStart === 0) {
+			optionsPosition = 20;
+		}
+		if (filteredOptions.length) {
+			optionsContrainerFocus = true;
+		}
 	}
 
 	function handleInputBlur() {
-		isTimeInputFocused = false;
+		optionsContrainerFocus = false;
 	}
 
 	onMount(() => {
@@ -127,7 +155,7 @@
 		} else if (event.key === 'Tab') {
 			if (inputElement.value != '') {
 				event.preventDefault();
-				completeInputText(filteredOptions[1]);
+				completeInputText(filteredOptions[0]);
 			}
 		} else if (event.key === 'Escape') {
 			handleInputBlur();
@@ -152,22 +180,22 @@
 	}
 </script>
 
-<div id="container" class="relative">
+<div id="container" class="relative mb-{timeTagError ? '02' : '2'}">
 	<div class="w-full">
-		
+		<span>{specificTags}</span>
 		<input
 			id="TimeTags"
 			type="tags"
 			class="w-full bg-white rounded-lg border border-slate-800 p-4
       			pe-12 text-sm font-calibri shadow-sm focus:border-none"
-            placeholder="Select the Days"
+			placeholder="Select the Days"
 			bind:value={allValues}
 			bind:this={inputElement}
 			on:input={handleInputClick}
 			on:keydown={handleKeyPress}
 		/>
 
-		{#if isTimeInputFocused}
+		{#if optionsContrainerFocus}
 			<div
 				id="timeoptionContainer"
 				class=" absolute z-10 mt-1 w-28 max-h-40 overflow-y-auto border border-slate-800 bg-white rounded-lg shadow-lg"
@@ -188,4 +216,8 @@
 			</div>
 		{/if}
 	</div>
+
+	{#if timeTagError}
+		<span class="label-text-alt mx-2 text-redish font-bold select-none">{timeTagErrorFlag}</span>
+	{/if}
 </div>

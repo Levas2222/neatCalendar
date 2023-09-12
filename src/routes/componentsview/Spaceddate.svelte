@@ -18,7 +18,8 @@
 		<div class="join">
 			<select
 				bind:value={selected}
-				class="select select-bordered bg-whitish border border-slate-200 rounded-lg h-12 join-item"
+				class="select select-bordered  border rounded-lg h-12 join-item
+					bg-white border-slate-800 text-textdark hover:text-textgray "
 			>
 				<option value="0">Hours</option>
 				<option selected value="1">Days</option>
@@ -27,7 +28,9 @@
 
 			<button
 				data-action="decrement"
-				class="join-item bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full w-12 rounded-l cursor-pointer outline-none"
+				class="join-item bg-white border 
+				        border-slate-800 text-textdark hover:text-textgray 
+				        h-full w-12 rounded-l cursor-pointer outline-none"
 				on:click={spaceDecrement}
 			>
 				<span class="m-auto text-2xl font-thin">−</span>
@@ -35,7 +38,8 @@
 			<input
 				type="number"
 				class="no-spin join-item outline-none focus:outline-none text-center w-12
-                       bg-gray-300 font-semibold text-md hover:text-black
+						bg-white border font-semibold 
+						text-md border-slate-800 text-textdark hover:text-textgray 
                        focus:text-black md:text-basecursor-default
                        flex items-center text-gray-700 outline-none"
 				name="custom-input-number"
@@ -43,7 +47,7 @@
 			/>
 			<button
 				data-action="increment"
-				class="join-item w-12 bg-gray-300 text-gray-600 hover:text-gray-700 hover:bg-gray-400 h-full rounded-r cursor-pointer"
+				class="join-item w-12 bg-white border border-slate-800 text-textdark hover:text-textgray hover:bg-slate-100 h-full rounded-r cursor-pointer"
 				on:click={spaceIncrement}
 			>
 				<span class="m-auto text-2xl font-thin">+</span>
@@ -55,7 +59,7 @@
 <style>
 	input.no-spin {
 		appearance: none; /* Removes default arrows in most browsers */
-		-moz-appearance: 'textfield';
+		-moz-appearance: 'textfield'; /* Firefox */
 		-webkit-appearance: textfield; /* Safari */
 	}
 </style>

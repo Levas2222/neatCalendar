@@ -1,9 +1,12 @@
 <script>
-	import Duedatepicker from '../components/Duedatepicker.svelte';
-	import Initialdatepicker from '../components/Initialdatepicker.svelte';
-	import Spaceddate from '../components/Spaceddate.svelte';
-	import Tagscomponent from '../components/Tagscomponent.svelte';
-	import Timetagscomponent from '../components/Timetagscomponent.svelte';
+	import Duedatepicker from './Duedatepicker.svelte';
+	import Initialdatepicker from './Initialdatepicker.svelte';
+	import Spaceddate from './Spaceddate.svelte';
+	import Tagscomponent from './Tagscomponent.svelte';
+	import Timetagscomponent from './Timetagscomponent.svelte';
+
+	let status
+
 
 	let name = '';
 	let description = '';

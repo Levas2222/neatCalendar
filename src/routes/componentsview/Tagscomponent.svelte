@@ -52,9 +52,14 @@
 		}
 		return charArray.join('');
 	}
+	function handleDublicates(allValues:string){
+
+
+		return allValues
+	}
 
 	function handleInputClick() {
-		[specificTags, inputValue] = handleCommaSeparation(allValues);
+		
 
 		//illegal inputs
 		const regex = /create\s?(,|\s)/i;
@@ -74,7 +79,9 @@
 		}
 
 		//Modification to Input Line
+		[specificTags, inputValue] = handleCommaSeparation(allValues);
 		allValues=addSpaceAfterCommas(allValues);
+		allValues = handleDublicates(allValues);
 
 		//Modification to Options
 		filteredOptions = options.filter((option) =>
@@ -102,17 +109,20 @@
 	function completeInputText(option: string) {
 		const regex = /^\s*Create(.*)\s*$/;
 		const match = regex.exec(option);
-		if (match && match[1]) {
-			inputValue = ', ';
-		} else {
-			inputValue = option + ', ';
-		}
 
 		allValues = allValues.replace(inputValue, '');
 		inputValue = '';
-		allValues = allValues + option + ', ';
+		allValues = allValues + option +', ' ;
 
-		
+
+
+		if (match && match[1]) {
+			inputValue = ', ';
+		}
+
+
+
+
 
 		handleInputClick();
 		inputElement.focus();
@@ -176,7 +186,7 @@
 </script>
 
 <div id="container" class="relative">
-
+	<span>Tags:{specificTags},Input:{inputValue}</span>
 	<input
 		id="Tags"
 		type="tags"
