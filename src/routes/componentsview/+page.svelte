@@ -1,35 +1,63 @@
-<script>
+<script lang='ts'>
+	
 	import Duedatepicker from './Duedatepicker.svelte';
 	import Initialdatepicker from './Initialdatepicker.svelte';
 	import Spaceddate from './Spaceddate.svelte';
 	import Tagscomponent from './Tagscomponent.svelte';
 	import Timetagscomponent from './Timetagscomponent.svelte';
 
-	let status
-
+	let status;
 
 	let name = '';
 	let description = '';
 	let tags = '';
 	let toggle = false;
-	let initialdate='';
-	let initialtime='';
+	let initialdate = '';
+	let initialtime = '';
 
 	let isRepeated = false;
-	let emailNotifications= false;
+	let emailNotifications = false;
 
-	let nameError=true;
+	let nameError = false;
 	let nameErrorflag = 'Not a valid name for an event.';
 
-	let tagError=true;
+	let tagError = false;
 	let tagErrorflag = 'Not valid tags for an event.';
 
-	let initDateError=true;
+	let initDateError = false;
 	let initDateErrorFlag = 'Not a valid initial date';
 
-	let dueDateError=true;
+	let timeTagError=false;
+	let timeTagErrorFlag='Not valid days to be repeated';
+
+	let dueDateError = false;
 	let dueDateErrorFlag = 'Not a valid due date';
 
+	let invalidForm:Boolean=false;
+	let invalidFormFlag:string="Not valid inputs"
+	function addEvent() {
+		if (isRepeated) {
+
+			if (nameError && tagError&& initDateError) {
+				invalidForm=true;
+				
+			}
+			else{
+				invalidForm=false;
+			}
+
+		}
+		else{
+
+			if(nameError && tagError&& initDateError && timeTagError&& dueDateError){
+				invalidForm=true;
+			}
+			else{
+				invalidForm=false;
+			}
+		}
+		
+	}
 </script>
 
 <!-- Characterizing the Event-->
@@ -39,12 +67,11 @@
 			<input
 				type="name"
 				class="w-full bg-white rounded-lg border border-slate-800 p-4
-						pe-4  text-sm shadow-sm focus:border-none"
+						pe-4 text-sm shadow-sm focus:border-none"
 				placeholder="Name"
 			/>
 			{#if nameError}
-			<span class="label-text-alt mx-2 text-redish font-bold select-none">{nameErrorflag}</span>
-			
+				<span class="label-text-alt mx-2 text-redish font-bold select-none">{nameErrorflag}</span>
 			{/if}
 		</div>
 		<div class="mb-4">
@@ -57,13 +84,10 @@
 		<div class="mb-{tagError ? '2' : '4'}">
 			<Tagscomponent />
 			{#if tagError}
-			<span class="label-text-alt mx-2 text-redish font-bold select-none">{tagErrorflag}</span>
-			
+				<span class="label-text-alt mx-2 text-redish font-bold select-none">{tagErrorflag}</span>
 			{/if}
 		</div>
-		<Initialdatepicker dateerror={[initDateError,initDateErrorFlag]} />
-
-
+		<Initialdatepicker dateerror={[initDateError, initDateErrorFlag]} />
 
 		<!-- Toggle Box-->
 		<div class="form-control w-full justify-left">
@@ -78,30 +102,27 @@
 				</div>
 			</label>
 		</div>
-		
+
 		{#if isRepeated}
-		<div class="flex flex-col">
-			<div class="form-control  h-auto">
-				
-				<Timetagscomponent />
-			
+			<div class="flex flex-col">
+				<div class="form-control h-auto">
+					<Timetagscomponent />
+				</div>
+
+				<Spaceddate />
+				<Duedatepicker duedateerror={[dueDateError, dueDateErrorFlag]} />
 			</div>
-
-			<Spaceddate />
-			<Duedatepicker duedateerror={[dueDateError,dueDateErrorFlag]}/>
-		
-		</div>
-		
 		{/if}
-
 
 		<!-- Buttons Box-->
 		<div class="m-4 flex w-full justify-center items-center h-auto">
 			<div class="space-x-4">
 				<button class="btn btn-outline w-24">Cancel</button>
-				<button class="btn btn-outline btn-accent w-24">Add</button>
+				<button on:click={addEvent} class="btn btn-outline btn-accent w-24" >Add</button>
 			</div>
 		</div>
-
+		{#if invalidForm}
+			<span class="label-text-alt mx-2 text-redish font-bold select-none">{invalidFormFlag}</span>	
+		{/if}
 	</div>
 </div>

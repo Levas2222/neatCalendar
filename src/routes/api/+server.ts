@@ -1,5 +1,10 @@
+
 import type { RequestHandler } from './$types';
 
-export const GET: RequestHandler = async () => {
-    return new Response();
+
+export const GET = async () => {
+    const data = { message: 'Hello from the API route!' };
+    return {
+      body: data,
+    };
 };

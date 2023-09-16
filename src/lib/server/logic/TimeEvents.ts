@@ -1,4 +1,8 @@
-class TimeEvent {
+import {TimeTagList} from "/Users/spour/Documents/Projects/Web Projects/neatCalendar/neatCalendar/src/lib/server/logic/TimeTagList";
+
+
+
+export class TimeEvent {
     //character variables
     private name: string;
     private description: string;
@@ -10,7 +14,7 @@ class TimeEvent {
     //time variables
     private initialDate: Date;
     private repetable: boolean;
-    private repeatedDay:TimeTag[]=[];
+    private repeatedDay:TimeTagList=new TimeTagList(["None"]);
     private spacedType:string="Days";
     private spacedDuration:number=1;
     private dueDate:Date;
@@ -29,7 +33,7 @@ class TimeEvent {
     }
 
     updateParameters(name: string, description: string, initialDate: Date,tagsList:Tag[], repetable:boolean,
-        repeatedDay:TimeTag[],spacedType:string,spacedDuration:number, dueDate:Date ){
+        repeatedDay:TimeTagList,spacedType:string,spacedDuration:number, dueDate:Date ){
         
         this.name=name;
         this.description=description;
@@ -76,7 +80,7 @@ class TimeEvent {
             }
         } 
     }
-    generateID(name:string,dateStr:string){
+    private generateID(name:string,dateStr:string){
         
         const keystring=name+dateStr;
         let keyvalue:number=0;
@@ -86,6 +90,25 @@ class TimeEvent {
         }
 
         return keyvalue
+
+    }
+    generateInstance(sequenceNumber:number):Date | null{
+        
+        
+        if(this.repetable){
+
+            return null;
+
+        }
+        
+        let instancedate:Date;
+
+        
+        let nextEventDate:Date= new Date (this.initialDate.getTime()+86400000)
+
+        
+        return nextEventDate;
+
 
     }
 
