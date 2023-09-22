@@ -4,8 +4,8 @@ import {TimeTagList} from "/Users/spour/Documents/Projects/Web Projects/neatCale
 
 export class TimeEvent {
     //character variables
-    private name: string;
-    private description: string;
+    public name: string;
+    public description: string;
     private id: number;
     private tagsList: Tag[]=[];
     private idcount=0;

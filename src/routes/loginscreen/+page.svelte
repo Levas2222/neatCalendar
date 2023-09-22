@@ -8,25 +8,22 @@
 
 
 
-
-
-
-
-
 		<p class="mx-auto mt-4 max-w-md text-center select-none text-textgray">
 			Get started with NeatCalendar and create  customizable repetable time events with ease.
 		</p>
 
-		<form action="" class="mb-0 mt-6 space-y-4 rounded-lg p-4 
+		<form action="?/submit" class="mb-0 mt-6 space-y-4 rounded-lg p-4 
 			shadow-lg sm:p-6 lg:p-8 text-textgray select-none">
 			<p class="text-center text-lg font-medium">Sign in to your account</p>
-
+			
 			<div>
 				<label for="email" class="sr-only">Email</label>
 
 				<div class="relative">
 					<input
 						type="email"
+						name="email"
+						id="email"
 						class="w-full bg-white rounded-lg border border-slate-800 p-4
 						pe-12 text-sm shadow-sm focus:border-none"
 						placeholder="Enter email"
@@ -57,6 +54,8 @@
 				<div class="relative">
 					<input
 						type="password"
+						name="password"
+						id="password"
 						class="w-full bg-white rounded-lg border border-slate-800 p-4
 						pe-12 text-sm shadow-sm focus:border-none"
 						placeholder="Enter password"
@@ -86,6 +85,7 @@
 					</span>
 				</div>
 			</div>
+
 
 			<button
 				type="submit"

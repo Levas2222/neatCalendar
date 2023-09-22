@@ -12,13 +12,13 @@
 	}
 </script>
 
-<div class="mx-4 my-4 w-full">
-	<div class="flex flex-row h-12 rounded-lg relative bg-transparent mt-1">
-		<span class="mt-3 mx-4">Select the time between events</span>
+<div class="mx-4 my-4 w-full items-center justify-center">
+	<div class="flex flex-row rounded-lg relative bg-transparent mt-1 items-center justify-center ">
+		<span class="mt-0 mx-4">Select the time between events</span>
 		<div class="join">
 			<select
 				bind:value={selected}
-				class="select select-bordered  border rounded-lg h-12 join-item
+				class="select select-bordered  border rounded-lg  join-item
 					bg-white border-slate-800 text-textdark hover:text-textgray "
 			>
 				<option value="0">Hours</option>
@@ -30,14 +30,14 @@
 				data-action="decrement"
 				class="join-item bg-white border 
 				        border-slate-800 text-textdark hover:text-textgray 
-				        h-full w-12 rounded-l cursor-pointer outline-none"
+				        h-12 w-12 rounded-l cursor-pointer outline-none"
 				on:click={spaceDecrement}
 			>
 				<span class="m-auto text-2xl font-thin">−</span>
 			</button>
 			<input
 				type="number"
-				class="no-spin join-item outline-none focus:outline-none text-center w-12
+				class="no-spin join-item outline-none focus:outline-none text-center w-12 h-12
 						bg-white border font-semibold 
 						text-md border-slate-800 text-textdark hover:text-textgray 
                        focus:text-black md:text-basecursor-default
@@ -47,10 +47,12 @@
 			/>
 			<button
 				data-action="increment"
-				class="join-item w-12 bg-white border border-slate-800 text-textdark hover:text-textgray hover:bg-slate-100 h-full rounded-r cursor-pointer"
+				class="join-item w-12 h-12 bg-white border border-slate-800
+				 		text-textdark hover:text-textgray hover:bg-slate-100
+						rounded-r cursor-pointer"
 				on:click={spaceIncrement}
 			>
-				<span class="m-auto text-2xl font-thin">+</span>
+				<span class=" m-auto text-2xl font-thin">+</span>
 			</button>
 		</div>
 	</div>

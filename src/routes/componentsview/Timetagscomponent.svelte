@@ -1,6 +1,12 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
+
+	let timeTagError:boolean=false;
+	let timeTagErrorFlag: string="";
+	
+	export const timeerror=[timeTagError,timeTagErrorFlag];
+
 	let allValues = '';
 	let inputValue = '';
 	let highlightedIndex = -1;
@@ -14,15 +20,16 @@
 		'Friday',
 		'Saturday',
 		'Sunday',
-		'Weekday'
+		'Weekday',
+		'Weekend',
+		'Workday'
 	];
 
 	let specificTags: string[] = [];
 
 	let filteredOptions = options;
 
-	let timeTagError:boolean=false;
-	let timeTagErrorFlag: string;
+
 
 	function commaSeparation(allValues:string):[string[],string, string] {
 		 
@@ -54,13 +61,28 @@
 		return [taglist,inputValue,allValues]
 	}
 
-	function removeDupplicates(taglist:string){
+	function checkDuplicates(taglist:string[],input:string): boolean{
 		
-	
+		const arr =[...taglist];
+		arr.push(inputValue.trim());
+		const set =new Set(arr);
+		if (set.size===arr.length) {
+			return false
+		}
+		return true 
 	}
 
+	function contained(taglist:string[],input:string):boolean{
+		const arr = [...taglist];
+		arr.push(inputValue.trim());
+		const result = arr.every((value) => options.includes(value.trim()));
+		return result
+		
 
+		 
+	}
 
+	
 	function addSpaceAfterCommas(inputString: string): string {
 		const charArray = inputString.split('');
 		for (let i = 0; i < charArray.length; i++) {
@@ -85,6 +107,12 @@
 		if (lengthmatch) {
 			inputElement.readOnly = true;
 			timeTagErrorFlag="The tag name is too long";
+			timeTagError=true;
+		}else if (checkDuplicates(specificTags,inputValue)){
+			timeTagErrorFlag="Duplicates";
+			timeTagError=true;
+		}else if(contained(specificTags,inputValue)){
+			timeTagErrorFlag="Not included in Days";
 			timeTagError=true;
 		}
 		else{
